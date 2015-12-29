@@ -10,7 +10,7 @@ heatFlag = 0
 coolFlag = 0
 fanFlag = 0
 offFlag = 2
-
+--SMOKE WEED EVERDAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 while true do
   --HVAC control logic
   --Manual Control
