@@ -371,7 +371,7 @@
 				<table>
 					<tbody>
 						<tr>
-						<td>Heat Mode:</td>
+						<td>Heat Mode(don't touch this for now/untested):</td>
 						<td>
 							Off<input type="radio" name="heat" id="heatOff" value="0" onclick="reg.set('heatMode', 0, callback);">
 							Heat<input type="radio" name="heat" id="heatHeat" value="1" onclick="reg.set('heatMode', 1, callback);">
@@ -379,13 +379,32 @@
 							Auto<input type="radio" name="heat" id="heatAuto" value="3" onclick="reg.set('heatMode', 3, callback);">
 						</td>
 						</tr>
+						
 						<tr>
-						<td>Fan Mode:</td>
+						<td>Fan Mode(untested):</td>
+						<td>
+							On<input type="radio" name="fan" id="fanOn" value="0" onclick="reg.set('fanMode', 0, callback);">
+							Off(was Auto)<input type="radio" name="fan" id="fanAuto" value="1" onclick="reg.set('fanMode', 1, callback);">
+						</td>					
+						</tr>
+						
+						<tr>
+						<td>Heat Mode(untested):</td>
 						<td>
 							On<input type="radio" name="fan" id="fanOn" value="0" onclick="reg.set('fanMode', 0, callback);">
 							Auto<input type="radio" name="fan" id="fanAuto" value="1" onclick="reg.set('fanMode', 1, callback);">
 						</td>					
 						</tr>
+						 
+						<tr>
+						<td>Cool Mode(untested):</td>
+						<td>
+							On<input type="radio" name="fan" id="fanOn" value="0" onclick="reg.set('fanMode', 0, callback);">
+							Auto<input type="radio" name="fan" id="fanAuto" value="1" onclick="reg.set('fanMode', 1, callback);">
+						</td>					
+						</tr>
+
+						
 					</tbody>
 				</table>
 				</td>

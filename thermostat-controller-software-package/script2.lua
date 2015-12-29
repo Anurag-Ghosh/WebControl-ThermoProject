@@ -10,8 +10,7 @@ heatFlag = 0
 coolFlag = 0
 fanFlag = 0
 offFlag = 2
---SMOKE WEED EVERDAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
---DANK ALARMS,6242021
+
 while true do
   --HVAC control logic
   --Manual Control
@@ -177,6 +176,10 @@ while true do
   --Fan mode
   if reg.fanMode == 0 then
     io.fan = 1
+	--This is to turn the fan off(I added this)
+	elseif reg.fanMode == 1 then
+    io.fan = 0
+
 	else
     if io.heat == 1 and reg.fanWithHeat == 1 then
       io.fan = 1
