@@ -11,7 +11,7 @@ coolFlag = 0
 fanFlag = 0
 offFlag = 2
 --SMOKE WEED EVERDAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
---DANK ALARMS
+--DANK ALARMS,62420
 while true do
   --HVAC control logic
   --Manual Control
