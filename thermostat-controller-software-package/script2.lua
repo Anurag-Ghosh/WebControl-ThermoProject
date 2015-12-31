@@ -7,7 +7,7 @@ while true do
     if reg.heatMode == 1 then
 	 io.heat = 1
      elseif reg.heatMode == 0 then
-      	io.cool = 0
+      	io.heat = 0
       end
       
     --COOL
