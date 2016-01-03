@@ -174,19 +174,20 @@
 							if(key === "setTemp")
 								setTemp = parseInt(val);
 						}else if(key === "heatMode"){
-							if(val == 0)
+							if(val == 1)
+								document.getElementById("heatOn").checked = true;
+							else if(val == 0)
 								document.getElementById("heatOff").checked = true;
-							else if(val == 1)
-								document.getElementById("heatHeat").checked = true;
-							else if(val == 2)
-								document.getElementById("heatCool").checked = true;
-							else if(val == 3)
-								document.getElementById("heatAuto").checked = true;
+						}else if(key === "coolMode"){
+							 if(val == 1)
+								document.getElementById("coolOn").checked = true;
+							else if(val == 0)
+								document.getElementById("coolOff").checked = true;
 						}else if(key === "fanMode"){
-							if(val == 0)
+							if(val == 1)
 								document.getElementById("fanOn").checked = true;
-							else if(val == 1)
-								document.getElementById("fanAuto").checked = true;
+							else if(val == 0)
+								document.getElementById("fanOff").checked = true;
 						}else if(key === "hold"){
 							document.getElementById(key).style.visibility = (val ? 'visible' : 'hidden');
 							hold = val?0:1
@@ -321,7 +322,7 @@
 				<table>
 					<tbody>
 						<tr>
-						<td><label id="day7" style="color:white">7-DAY</label></td>
+						<td><label id="day7" style="color:white">Online Control Panel</label></td>
 						<td><img src="pause.png" id="hold" alt="Hold"></td>
 						<td><img src="heat.png" id="heat" alt="Heat On" height="30px"></td>
 						<td><img src="cool.png" id="cool" alt="Cool On" height="30px"></td>
@@ -371,39 +372,38 @@
 				<table>
 					<tbody>
 						<tr>
-						<td>Heat Mode(don't touch this for now/untested):</td>
+						<td>Heat Mode:</td>
 						<td>
 							Off<input type="radio" name="heat" id="heatOff" value="0" onclick="reg.set('heatMode', 0, callback);">
-							Heat<input type="radio" name="heat" id="heatHeat" value="1" onclick="reg.set('heatMode', 1, callback);">
-							Cool<input type="radio" name="heat" id="heatCool" value="2" onclick="reg.set('heatMode', 2, callback);">
 							Auto<input type="radio" name="heat" id="heatAuto" value="3" onclick="reg.set('heatMode', 3, callback);">
 						</td>
 						</tr>
-						
 						<tr>
-						<td>Fan Mode(untested):</td>
+						<td>Heat Mode:</td>
 						<td>
-							On<input type="radio" name="fan" id="fanOn" value="0" onclick="reg.set('fanMode', 0, callback);">
-							Off(was Auto)<input type="radio" name="fan" id="fanAuto" value="1" onclick="reg.set('fanMode', 1, callback);">
+							On<input type="radio" name="heat" id="heatOn" value="1" onclick="reg.set('heatMode', 1, callback);">
+							Off<input type="radio" name="heat" id="heatOff" value="0" onclick="reg.set('heatMode', 0, callback);">
+						</td>
+						</tr>
+									 
+						<tr>
+						<td>Cool Mode:</td>
+						<td>
+							On<input type="radio" name="cool" id="coolOn" value="1" onclick="reg.set('coolMode', 1, callback);">
+							Off<input type="radio" name="cool" id="coolOff" value="0" onclick="reg.set('coolMode', 0, callback);">
 						</td>					
 						</tr>
 						
 						<tr>
-						<td>Heat Mode(untested):</td>
+						<td>Fan Mode:</td>
 						<td>
-							On<input type="radio" name="fan" id="fanOn" value="0" onclick="reg.set('fanMode', 0, callback);">
-							Auto<input type="radio" name="fan" id="fanAuto" value="1" onclick="reg.set('fanMode', 1, callback);">
+							On<input type="radio" name="fan" id="fanOn" value="1" onclick="reg.set('fanMode', 1, callback);">
+							Off<input type="radio" name="fan" id="fanOff" value="0" onclick="reg.set('fanMode', 0, callback);">
 						</td>					
 						</tr>
+				
 						 
-						<tr>
-						<td>Cool Mode(untested):</td>
-						<td>
-							On<input type="radio" name="fan" id="fanOn" value="0" onclick="reg.set('fanMode', 0, callback);">
-							Auto<input type="radio" name="fan" id="fanAuto" value="1" onclick="reg.set('fanMode', 1, callback);">
-						</td>					
-						</tr>
-
+					
 						
 					</tbody>
 				</table>
@@ -414,8 +414,8 @@
 				<td class="border"></td>
 				<td align="center">
 				<table>
-					<td>Current Humidity:</td>
-					<td><div class=number><span id="curHumidity">--.--</span>%</div></td>
+					<td>Temperature H-room:</td>
+					<td><div class=number><span id="curHumidity">--.--</span>&deg;{$io->units("curTemp")}</div></td>
 				</table>
 				</td>
 				<td class="border"></td>				
@@ -423,22 +423,6 @@
 			<tr>
 				<td class="border"></td>
 				<td align="center">
-				<table>
-					<tbody>
-						<tr>
-							<input type="button" value="Reset Filter" onclick="resetFilter();">
-							<input type="button" value="Hold" onclick="setHold();">				
-						</tr>
-					</tbody>
-				</table>
-				</td>
-				<td class="border"></td>
-			</tr>
-			<tr>
-				<td class="border"></td>
-				<td align="center" style="font-size:18px">
-					Change Filter In <span id="filterReset">--</span> Days.
-					<script>setFilter();</script>
 				</td>
 				<td class="border"></td>
 			</tr>
@@ -456,31 +440,8 @@
 				<td class="border"></td>
 				<td align="center">
 				<table>
-					<td>Current Temperature:</td>
+					<td>Outside Temperature:</td>
 					<td><div class=number><span id="outTemp">--.--</span>&deg;{$io->units("curTemp")}</div></td>
-				</table>
-				<table>
-					<tbody>
-					<tr align="center">
-						<td style="width: 150px;"></td>
-						<td style="width: 100px;" colspan="2">High</td>
-						<td style="width: 100px;" colspan="2">Low</td>
-					</tr>
-					<tr align="center">
-						<td align="left">Today</td>
-						<td><div class=heat><span id="todayHigh">--.--</span>&deg;{$io->units("curTemp")}</div></td>
-						<td><span id="todayHighTime">--:--</span></td>
-						<td><div class=number><span id="todayLow">--.--</span>&deg;{$io->units("curTemp")}</div></td>
-						<td><span id="todayLowTime">--:--</span></td>
-					</tr>
-					<tr align="center">
-						<td align="left">Yesterday</td>
-						<td><div class=heat><span id="yesterdayHigh">--.--</span>&deg;{$io->units("curTemp")}</div></td>
-						<td><span id="yesterdayHighTime">--:--</span></td>
-						<td><div class=number><span id="yesterdayLow">--.--</span>&deg;{$io->units("curTemp")}</div></td>
-						<td><span id="yesterdayLowTime">--:--</span></td>
-					</tr>
-					</tbody>
 				</table>
 				</td>
 				<td class="border"></td>
